@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Skill tiles + percentage dials
+   The dials are what the template shipped; the About page now renders
+   <SkillLogo> tiles instead, and keeps the same 120px round footprint so the
+   grid spacing is unchanged. The `.c100` rules below are unused but kept so
+   <SkillCircle> still works if you switch back.
+   ========================================================================== */
+
+.skill-logo {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background-color: var(--surface);
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+/* Wider than it is tall so landscape marks (php) get room to grow; the square
+   ones are capped by the height and stay 56px. */
+.skill-logo img {
+  width: 76px;
+  height: 56px;
+  object-fit: contain;
+  transition: 0.3s;
+}
+
+.skill-logo:hover img {
+  transform: scale(1.12);
+}
+
+/* --------------------------------------------------------------------------
+   Percentage dials — kept for <SkillCircle>, not used by the About page.
+   The template shipped 27 KB of generated `.c100.pNN` rules. The technique is
+   the same clip-rect trick, but the rotation is passed as an inline style, so
+   only the two states (<=50% / >50%) need CSS here.
+   -------------------------------------------------------------------------- */
+
+.c100 {
+  position: relative;
+  font-size: 120px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  float: none;
+  margin: 0 auto;
+  background-color: var(--surface);
+}
+
+.c100 *,
+.c100 *:before,
+.c100 *:after {
+  box-sizing: content-box;
+}
+
+.c100 > span {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 5em;
+  line-height: 5em;
+  font-size: 0.2em;
+  color: var(--text);
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.2s ease-out;
+}
+
+.c100:after {
+  position: absolute;
+  top: 0.08em;
+  left: 0.08em;
+  display: block;
+  content: ' ';
+  border-radius: 50%;
+  background-color: var(--bg);
+  width: 0.84em;
+  height: 0.84em;
+  transition: all 0.2s ease-in;
+}
+
+.c100 .slice {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  clip: rect(0em, 1em, 1em, 0.5em);
+}
+
+/* Past the half-way mark the slice has to expose the whole circle and a second
+   half-disc (`.fill`) is pinned at 180deg to cover the remainder. */
+.c100.gt50 .slice {
+  clip: rect(auto, auto, auto, auto);
+}
+
+.c100 .bar,
+.c100.gt50 .fill {
+  position: absolute;
+  border: 0.08em solid var(--accent);
+  width: 0.84em;
+  height: 0.84em;
+  clip: rect(0em, 0.5em, 1em, 0em);
+  border-radius: 50%;
+}
+
+.c100.gt50 .fill {
+  transform: rotate(180deg);
+}

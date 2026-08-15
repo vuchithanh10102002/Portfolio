@@ -1,0 +1,111 @@
+/* ==========================================================================
+   Colour skins
+   The original template shipped one stylesheet per colour and swapped the
+   <link> at runtime. Here every skin is just a value for --accent, so the
+   switcher only has to set one attribute on <html>.
+   ========================================================================== */
+
+:root {
+  --accent: #ffb400; /* yellow — the dark demo default */
+
+  /* Dark theme surfaces */
+  --bg: #111;
+  --surface: #252525;
+  --surface-2: #2b2a2a;
+  --revealer-layer: #222;
+  --border: #252525;
+  --border-strong: #333;
+  --text: #fff;
+  --text-muted: #eee;
+  --title-bg: rgba(255, 255, 255, 0.07);
+  --nav-icon: #ddd;
+  --card: #252525; /* blog post body */
+  --panel: #252525; /* lightbox figure */
+  --input-bg: #252525;
+  --input-border: #111;
+  --overlay: rgba(0, 0, 0, 0.85); /* lightbox backdrop */
+  --slide-veil: rgba(0, 0, 0, 0.7); /* dimming on non-current slides */
+}
+
+[data-skin='blue'] { --accent: #1976d2; }
+[data-skin='green'] { --accent: #4caf50; }
+[data-skin='yellow'] { --accent: #ffb400; }
+[data-skin='blueviolet'] { --accent: #8a2be2; }
+[data-skin='goldenrod'] { --accent: #daa520; }
+[data-skin='magenta'] { --accent: #ff00ff; }
+[data-skin='orange'] { --accent: #ff8c00; }
+[data-skin='purple'] { --accent: #800080; }
+[data-skin='red'] { --accent: #f44336; }
+[data-skin='yellowgreen'] { --accent: #9acd32; }
+
+/* Light theme surfaces */
+body.light {
+  --bg: #fff;
+  --surface: #eee;
+  --surface-2: #eee;
+  --revealer-layer: #eee;
+  --border: #ddd;
+  --border-strong: #ddd;
+  --text: #666;
+  --text-muted: #777;
+  --title-bg: rgba(30, 37, 48, 0.07);
+  --nav-icon: #666;
+  --card: #f2f2f2;
+  --panel: #fff;
+  --input-bg: #fff;
+  --input-border: #ddd;
+  --overlay: rgba(0, 0, 0, 0.7);
+  --slide-veil: rgba(255, 255, 255, 0.77);
+}
+
+/* --- Accent applications (mirrors css/skins/yellow.css) --- */
+
+.home h1,
+.about .box-stats h3,
+.title-section h2 span,
+.mobile-nav-element.active,
+.blog .post-container:hover .post-content .entry-header h3 a,
+.blog .post-content .entry-header h3 a:hover,
+.contact .custom-span-contact i,
+.contact .custom-span-contact a:hover,
+.portfolio .slideshow figcaption h3,
+.portfolio .slideshow a,
+.blog-post .meta i {
+  color: var(--accent);
+}
+
+.home .home-details h1:before,
+.about .resume-box .icon,
+.about .resume-box .points li:before,
+.contact ul.social li a:hover,
+.blog .page-link:hover,
+.blog .page-item.active .page-link,
+.portfolio .grid li figure div,
+.header ul.icon-menu li.icon-box.active,
+.header ul.icon-menu li.icon-box:hover,
+.header .icon-box h2,
+.home .color-block,
+.portfolio .slideshow .carousel-indicators li.active,
+.line:before,
+.button:before,
+.button-icon {
+  background-color: var(--accent);
+}
+
+.contact .contactform input[type='text']:focus,
+.contact .contactform input[type='email']:focus,
+.contact .contactform textarea:focus,
+.blog .page-item.active .page-link,
+.blog .page-link:hover,
+.button {
+  border: 1px solid var(--accent);
+}
+
+.blog .post-thumb {
+  border-bottom: 5px solid var(--accent);
+}
+
+/* Skill tiles keep their own colours, so the accent only shows on the ring. */
+.about .skill-logo:hover {
+  border-color: var(--accent);
+}

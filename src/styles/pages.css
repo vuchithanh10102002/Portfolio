@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Page container + revealer transition (ported from css/component.css)
+   Only the 3-layer effect the dark demo actually uses (anim--effect-3) is kept.
+   ========================================================================== */
+
+html,
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.pages {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  z-index: 1;
+  min-height: 100%;
+  opacity: 0;
+}
+
+.page--current {
+  visibility: visible;
+  position: relative;
+  overflow: auto;
+  opacity: 1;
+}
+
+/* --- Revealer --- */
+
+.revealer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.revealer--cornertopleft,
+.revealer--cornertopright,
+.revealer--cornerbottomleft,
+.revealer--cornerbottomright,
+.revealer--right,
+.revealer--left {
+  top: 50%;
+  left: 50%;
+}
+
+.revealer--top,
+.revealer--bottom {
+  left: 0;
+}
+
+.revealer--top {
+  bottom: 100%;
+}
+
+.revealer--bottom {
+  top: 100%;
+}
+
+.revealer__layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: var(--revealer-layer);
+}
+
+/* The middle layer carries the accent colour. */
+.revealer__layer:nth-child(2) {
+  background: var(--accent);
+}
+
+/* --- Three layer effect (anim--effect-3) --- */
+
+.revealer--animate .revealer__layer {
+  animation: anim-effect-3-1 1.5s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
+}
+
+.revealer--animate .revealer__layer:nth-child(2) {
+  animation-name: anim-effect-3-2;
+}
+
+.revealer--animate .revealer__layer:nth-child(3) {
+  animation-name: anim-effect-3-3;
+}
+
+@keyframes anim-effect-3-1 {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  25%,
+  75% {
+    transform: translate3d(0, -100%, 0);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: translate3d(0, -200%, 0);
+  }
+}
+
+@keyframes anim-effect-3-2 {
+  0%,
+  12.5% {
+    transform: translate3d(0, 0, 0);
+  }
+  37.5%,
+  62.5% {
+    transform: translate3d(0, -100%, 0);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  87.5%,
+  100% {
+    transform: translate3d(0, -200%, 0);
+  }
+}
+
+@keyframes anim-effect-3-3 {
+  0%,
+  25% {
+    transform: translate3d(0, 0, 0);
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  75%,
+  100% {
+    transform: translate3d(0, -200%, 0);
+  }
+}
